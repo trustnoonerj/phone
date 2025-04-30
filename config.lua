@@ -42,9 +42,9 @@ Config.PhoneApplications = {
         Alerts = 0,
     },
     ["whatsapp"] = {
-        app = "ChitChat",
+        app = "whatsapp",
         icon = "fab fa-whatsapp",
-        tooltipText = "ChitChat",
+        tooltipText = "whatsapp",
         tooltipPos = "top",
         style = "font-size: 2.8vh";
         job = false,
