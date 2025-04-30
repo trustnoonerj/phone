@@ -1,38 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
-.chitchat-app {
+.whatsapp-app {
     display: none;
     height: 90%;
     width: 100%;
     overflow: hidden;
 }
 
-.chitchat-header {
+.whatsapp-header {
     position: absolute;
     top: 0;
     width: 100%;
     height: 8vh;
 }
-.chitchat-header-top {
+.whatsapp-header-top {
     position: relative;
     height: 4.5vh;
     width: 100%;
     background-color: #101d25;
 }
-.chitchat-header-footer {
+.whatsapp-header-footer {
     position: relative;
     height: 4.5vh;
     width: 100%;
     background-color: #1f2c34;
 }
-.chitchat-header-footer > p {
+.whatsapp-header-footer > p {
     padding-top: 1.3vh;
     padding-left: 2vh;
     color: white;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5vh;
 }
-#chitchat-search-chats {
+#whatsapp-search-chats {
     position: absolute;
     right: 0;
     top: 0;
@@ -42,10 +42,10 @@
     transition: .1s;
     font-size: 1.5vh;
 }
-#chitchat-search-chats:hover {
+#whatsapp-search-chats:hover {
     color: rgb(182, 182, 182);
 }
-#chitchat-search-input {
+#whatsapp-search-input {
     display: none;
     position: absolute;
     background: none;
@@ -67,7 +67,7 @@
     width: 12vh;
 }
 
-.chitchat-chats {
+.whatsapp-chats {
     position: absolute;
     width: 100%;
     height: 84%;
@@ -77,21 +77,21 @@
     overflow-x: hidden !important;
 }
 
-.chitchat-chats::-webkit-scrollbar {
+.whatsapp-chats::-webkit-scrollbar {
     position: absolute;
     width: .6vh;
 }
 
-.chitchat-chats::-webkit-scrollbar-track {
+.whatsapp-chats::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.chitchat-chats::-webkit-scrollbar-thumb {
+.whatsapp-chats::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.664);
     border-radius: 1vh 0 0 1vh;
 }
 
-.chitchat-chat-unreadmessages {
+.whatsapp-chat-unreadmessages {
     display: none;
     position: absolute;
     right: 1vh;
@@ -107,7 +107,7 @@
     line-height: 1.9vh;
 }
 
-.chitchat-chat {
+.whatsapp-chat {
     position: relative;
     width: 90%;
     height: 7vh;
@@ -121,11 +121,11 @@
     border-bottom: 0vh solid rgba(245, 245, 245, 0.68);
 }
 
-.chitchat-chat:hover {
+.whatsapp-chat:hover {
     background: #0d1218c0;
 }
 
-.chitchat-chat-picture {
+.whatsapp-chat-picture {
     position: absolute;
     height: 5vh;
     width: 5vh;
@@ -137,7 +137,7 @@
     background-size: cover;
 }
 
-.chitchat-openedchat-picture {
+.whatsapp-openedchat-picture {
     position: absolute;
     height: 3.5vh;
     width: 3.5vh;
@@ -150,7 +150,7 @@
     background-size: cover;
 }
 
-.chitchat-chat-name {
+.whatsapp-chat-name {
     position: absolute;
     top: 1.35vh;
     left: 7vh;
@@ -161,7 +161,7 @@
     letter-spacing: 1px;
 }
 
-.chitchat-chat-lastmessage {
+.whatsapp-chat-lastmessage {
     position: absolute;
     bottom: .6vh;
     left: 7vh;
@@ -171,13 +171,13 @@
     max-width: 17vh;
 }
 
-.chitchat-chat-lastmessage > p {
+.whatsapp-chat-lastmessage > p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.chitchat-chat-lastmessagetime {
+.whatsapp-chat-lastmessagetime {
     position: absolute;
     top: 1.35vh;
     right: 1vh;
@@ -186,17 +186,17 @@
     color: white;
 }
 
-.chitchat-openedchat {
+.whatsapp-openedchat {
     display: none;
     position: absolute;
     top: 0;
     left: -30vh;
     height: 95%;
     width: 100%;
-    background-image: url('../img/apps/chitchat-chat.png');
+    background-image: url('../img/apps/whatsapp-chat.png');
 }
 
-#chitchat-openedchat-back {
+#whatsapp-openedchat-back {
     position: absolute;
     line-height: 5.5vh;
     top: -.4vh;
@@ -205,11 +205,11 @@
     transition: .1s;
 }
 
-#chitchat-openedchat-back:hover {
+#whatsapp-openedchat-back:hover {
     color: rgb(197, 197, 197);
 }
 
-.chitchat-openedchat-name {
+.whatsapp-openedchat-name {
     position: absolute;
     line-height: 5.5vh;
     top: -.4vh;
@@ -220,7 +220,7 @@
     font-size: 1vh;
 }
 
-.chitchat-header-openedchat{
+.whatsapp-header-openedchat{
     position: absolute;
     top: 0;
     width: 100%;
@@ -228,19 +228,19 @@
     background-color: rgba(7, 94, 84, 0);
 }
 
-.chitchat-header-top-openedchat {
+.whatsapp-header-top-openedchat {
     position: relative;
     height: 4.5vh;
     width: 100%;
 }
 
-.chitchat-header-footer-openedchat {
+.whatsapp-header-footer-openedchat {
     position: relative;
     height: 4.5vh;
     width: 100%;
 }
 
-.chitchat-header-footer-openedchat > p {
+.whatsapp-header-footer-openedchat > p {
     padding-top: 1.3vh;
     padding-left: 2vh;
     color: white;
@@ -248,20 +248,20 @@
     font-size: 2vh;
 }
 
-.chitchat-extra-buttons {
+.whatsapp-extra-buttons {
     display: none;
     position: absolute;
     left: -10vh;
 }
 
-.chitchat-openedchat-input {
+.whatsapp-openedchat-input {
     position: absolute;
     bottom: 1%;
     width: 100%;
     height: 10vh;
 }
 
-.chitchat-extra-button {
+.whatsapp-extra-button {
     background: none;
     border: none;
     background: #0eca17;
@@ -281,16 +281,16 @@
     transition: .1s linear;
 }
 
-.chitchat-extra-button:hover {
+.whatsapp-extra-button:hover {
     background: #0c65c4;
 }
 
-.chitchat-extra-button > i {
+.whatsapp-extra-button > i {
     line-height: 3.5vh;
     font-size: 1.5vh;
 }
 
-#chitchat-openedchat-message {
+#whatsapp-openedchat-message {
     position: absolute;
     border: none;
     background: #2d383e;
@@ -308,7 +308,7 @@
     color: white;
 }
 
-#chitchat-openedchat-send {
+#whatsapp-openedchat-send {
     position: relative;
     top: 30%;
     left: 81%;
@@ -324,11 +324,11 @@
     transition: all 0.15s ease 0s;
 }
 
-#chitchat-openedchat-send:hover {
+#whatsapp-openedchat-send:hover {
     background: #0cc449;
 }
 
-#chitchat-openedchat-message-extras {
+#whatsapp-openedchat-message-extras {
     position: relative;
     left: -9%;
     z-index: 100;
@@ -343,11 +343,11 @@
     transition: all 0.2s ease 0s;
 }
 
-#chitchat-openedchat-message-extras:hover {
+#whatsapp-openedchat-message-extras:hover {
     color: #0c65c4;
 }
 
-.chitchat-openedchat-messages {
+.whatsapp-openedchat-messages {
     position: absolute;
     height: 75%;
     width: 99%;
@@ -358,21 +358,21 @@
     overflow-y: scroll;
 }
 
-.chitchat-openedchat-messages::-webkit-scrollbar {
+.whatsapp-openedchat-messages::-webkit-scrollbar {
     position: absolute;
     width: .3vh;
 }
 
-.chitchat-openedchat-messages::-webkit-scrollbar-track {
+.whatsapp-openedchat-messages::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.chitchat-openedchat-messages::-webkit-scrollbar-thumb {
+.whatsapp-openedchat-messages::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.664);
     border-radius: 1vh 0 0 1vh;
 }
 
-.chitchat-openedchat-message{
+.whatsapp-openedchat-message{
     position: relative;
     width: fit-content;
     max-width: 80%;
@@ -385,12 +385,12 @@
     transition: .1s linear;
 }
 
-.chitchat-shared-location:hover {
+.whatsapp-shared-location:hover {
     opacity: .8;
     transition: .1s linear;
 }
 
-.chitchat-openedchat-message-me {
+.whatsapp-openedchat-message-me {
     background: #0f80f8;
     color: white;
     border-radius: 5px 0px 0px 5px;
@@ -399,7 +399,7 @@
     z-index: 1;
 }
 
-.chitchat-openedchat-message-other {
+.whatsapp-openedchat-message-other {
     background: #35484f;
     color: white;
     border-radius: 5px 5px 5px 5px;
@@ -407,7 +407,7 @@
     z-index: 1;
 }
 
-.chitchat-openedchat-message-time {
+.whatsapp-openedchat-message-time {
     font-size: 1.1vh;
     text-align: right;
     padding-left: 3.7vh;
@@ -423,7 +423,7 @@
     top: 0;
 }
 
-.chitchat-openedchat-date {
+.whatsapp-openedchat-date {
     position: sticky;
     top: 0.2vh;
     z-index: 2;
@@ -530,7 +530,7 @@
     border-color: #245247;
 }
 
-.chitchat-gallery{
+.whatsapp-gallery{
     display: none;
     position: relative;
     top: 32%;
@@ -544,7 +544,7 @@
     border-radius: 4px;
 }
 
-.chitchat-image-body{
+.whatsapp-image-body{
     display: inline-block;
     width: 40%;
     margin-left: 6.6%;
@@ -552,11 +552,11 @@
     margin-bottom: 2%;
 }
 
-.chitchat-image-image{
+.whatsapp-image-image{
     width: 100%;
 }
 
-.chitchat-gallery-close{
+.whatsapp-gallery-close{
     width: 86%;
     margin-top: 2%;
     margin-bottom: 2%;
@@ -569,17 +569,17 @@
     color: black;
 }
 
-.chitchat-gallery-close:hover{
+.whatsapp-gallery-close:hover{
     background: #c27e47;
 }
 
-.chitchat-gallery-box{
+.whatsapp-gallery-box{
     width: 100%;
     overflow-y: auto;
     height: 89%;
     max-height: 89%;
 }
 
-.chitchat-gallery-box::-webkit-scrollbar {
+.whatsapp-gallery-box::-webkit-scrollbar {
     display: none;
 }

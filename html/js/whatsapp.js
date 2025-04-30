@@ -1,29 +1,29 @@
-var chitchatSearchActive = false;
+var whatsappSearchActive = false;
 var OpenedChatPicture = null;
 var ExtraButtonsOpen = false;
 
 $(document).ready(function(){
-    $("#chitchat-search-input").on("keyup", function() {
+    $("#whatsapp-search-input").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $(".chitchat-chats .chitchat-chat").filter(function() {
+        $(".whatsapp-chats .whatsapp-chat").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
         });
     });
 });
 
-$(document).on('click', '#chitchat-search-chats', function(e){
+$(document).on('click', '#whatsapp-search-chats', function(e){
     e.preventDefault();
 
-    if ($("#chitchat-search-input").css('display') == "none") {
-        $("#chitchat-search-input").fadeIn(150);
-        chitchatSearchActive = true;
+    if ($("#whatsapp-search-input").css('display') == "none") {
+        $("#whatsapp-search-input").fadeIn(150);
+        whatsappSearchActive = true;
     } else {
-        $("#chitchat-search-input").fadeOut(150);
-        chitchatSearchActive = false;
+        $("#whatsapp-search-input").fadeOut(150);
+        whatsappSearchActive = false;
     }
 });
 
-$(document).on('click', '.chitchat-chat', function(e){
+$(document).on('click', '.whatsapp-chat', function(e){
     e.preventDefault();
 
     var ChatId = $(this).attr('id');
@@ -35,46 +35,46 @@ $(document).on('click', '.chitchat-chat', function(e){
         number: ChatData.number
     }));
 
-    if (chitchatSearchActive) {
-        $("#chitchat-search-input").fadeOut(150);
+    if (whatsappSearchActive) {
+        $("#whatsapp-search-input").fadeOut(150);
     }
 
-    $(".chitchat-openedchat").css({"display":"block"});
-    $(".chitchat-openedchat").animate({
+    $(".whatsapp-openedchat").css({"display":"block"});
+    $(".whatsapp-openedchat").animate({
         left: 0+"vh"
     },200);
 
-    $(".chitchat-chats").animate({
+    $(".whatsapp-chats").animate({
         left: 30+"vh"
     },200, function(){
-        $(".chitchat-chats").css({"display":"none"});
+        $(".whatsapp-chats").css({"display":"none"});
     });
 
-    $('.chitchat-openedchat-messages').animate({scrollTop: 9999}, 150);
+    $('.whatsapp-openedchat-messages').animate({scrollTop: 9999}, 150);
 
     if (OpenedChatPicture == null) {
         OpenedChatPicture = "./img/avatar.png";
         if (ChatData.picture != null || ChatData.picture != undefined || ChatData.picture != "default") {
             OpenedChatPicture = ChatData.picture
         }
-        $(".chitchat-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
+        $(".whatsapp-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
     }
 });
 
-$(document).on('click', '#chitchat-openedchat-back', function(e){
+$(document).on('click', '#whatsapp-openedchat-back', function(e){
     e.preventDefault();
-    $.post('https://qb-phone/GetchitchatChats', JSON.stringify({}), function(chats){
-        QB.Phone.Functions.LoadchitchatChats(chats);
+    $.post('https://qb-phone/GetwhatsappChats', JSON.stringify({}), function(chats){
+        QB.Phone.Functions.LoadwhatsappChats(chats);
     });
     OpenedChatData.number = null;
-    $(".chitchat-chats").css({"display":"block"});
-    $(".chitchat-chats").animate({
+    $(".whatsapp-chats").css({"display":"block"});
+    $(".whatsapp-chats").animate({
         left: 0+"vh"
     }, 200);
-    $(".chitchat-openedchat").animate({
+    $(".whatsapp-openedchat").animate({
         left: -30+"vh"
     }, 200, function(){
-        $(".chitchat-openedchat").css({"display":"none"});
+        $(".whatsapp-openedchat").css({"display":"none"});
     });
     OpenedChatPicture = null;
 });
@@ -112,18 +112,18 @@ GetCurrentDateKey = function() {
     return CurDate;
 }
 
-QB.Phone.Functions.LoadchitchatChats = function(chats) {
-    $(".chitchat-chats").html("");
+QB.Phone.Functions.LoadwhatsappChats = function(chats) {
+    $(".whatsapp-chats").html("");
     $.each(chats, function(i, chat){
         var profilepicture = "./img/avatar.png";
         if (chat.picture !== "default") {
             profilepicture = chat.picture
         }
         var LastMessage = QB.Phone.Functions.GetLastMessage(chat.messages);
-        var ChatElement = '<div class="chitchat-chat" id="chitchat-chat-'+i+'"><div class="chitchat-chat-picture" style="background-image: url('+profilepicture+');"></div><div class="chitchat-chat-name"><p>'+chat.name+'</p></div><div class="chitchat-chat-lastmessage"><p>'+LastMessage.message+'</p></div> <div class="chitchat-chat-lastmessagetime"><p>'+LastMessage.time+'</p></div><div class="chitchat-chat-unreadmessages unread-chat-id-'+i+'">1</div></div>';
+        var ChatElement = '<div class="whatsapp-chat" id="whatsapp-chat-'+i+'"><div class="whatsapp-chat-picture" style="background-image: url('+profilepicture+');"></div><div class="whatsapp-chat-name"><p>'+chat.name+'</p></div><div class="whatsapp-chat-lastmessage"><p>'+LastMessage.message+'</p></div> <div class="whatsapp-chat-lastmessagetime"><p>'+LastMessage.time+'</p></div><div class="whatsapp-chat-unreadmessages unread-chat-id-'+i+'">1</div></div>';
 
-        $(".chitchat-chats").append(ChatElement);
-        $("#chitchat-chat-"+i).data('chatdata', chat);
+        $(".whatsapp-chats").append(ChatElement);
+        $("#whatsapp-chat-"+i).data('chatdata', chat);
 
         if (chat.Unread > 0 && chat.Unread !== undefined && chat.Unread !== null) {
             $(".unread-chat-id-"+i).html(chat.Unread);
@@ -134,7 +134,7 @@ QB.Phone.Functions.LoadchitchatChats = function(chats) {
     });
 }
 
-QB.Phone.Functions.ReloadchitchatAlerts = function(chats) {
+QB.Phone.Functions.ReloadwhatsappAlerts = function(chats) {
     $.each(chats, function(i, chat){
         if (chat.Unread > 0 && chat.Unread !== undefined && chat.Unread !== null) {
             $(".unread-chat-id-"+i).html(chat.Unread);
@@ -182,10 +182,10 @@ FormatMessageTime = function() {
     return MessageTime;
 }
 
-$(document).on('click', '#chitchat-openedchat-send', function(e){
+$(document).on('click', '#whatsapp-openedchat-send', function(e){
     e.preventDefault();
 
-    var Message = $("#chitchat-openedchat-message").val();
+    var Message = $("#whatsapp-openedchat-message").val();
 
     if (Message !== null && Message !== undefined && Message !== "") {
         $.post('https://qb-phone/SendMessage', JSON.stringify({
@@ -195,17 +195,17 @@ $(document).on('click', '#chitchat-openedchat-send', function(e){
             ChatTime: FormatMessageTime(),
             ChatType: "message",
         }));
-        $("#chitchat-openedchat-message").val("");
+        $("#whatsapp-openedchat-message").val("");
         $("div.emojionearea-editor").data("emojioneArea").setText('');
     } else {
-        QB.Phone.Notifications.Add("fab fa-chitchat", "chitchat", "You can't send a empty message!", "#25D366", 1750);
+        QB.Phone.Notifications.Add("fab fa-whatsapp", "whatsapp", "You can't send a empty message!", "#25D366", 1750);
     }
 });
 
 $(document).on('keypress', function (e) {
     if (OpenedChatData.number !== null) {
         if(e.which === 13){
-            var Message = $("#chitchat-openedchat-message").val();
+            var Message = $("#whatsapp-openedchat-message").val();
 
             if (Message !== null && Message !== undefined && Message !== "") {
                 var clean = DOMPurify.sanitize(Message , {
@@ -220,9 +220,9 @@ $(document).on('keypress', function (e) {
                     ChatTime: FormatMessageTime(),
                     ChatType: "message",
                 }));
-                $("#chitchat-openedchat-message").val("");
+                $("#whatsapp-openedchat-message").val("");
             } else {
-                QB.Phone.Notifications.Add("fab fa-chitchat", "chitchat", "You can't send a empty message!", "#25D366", 1750);
+                QB.Phone.Notifications.Add("fab fa-whatsapp", "whatsapp", "You can't send a empty message!", "#25D366", 1750);
             }
         }
     }
@@ -268,21 +268,21 @@ QB.Phone.Functions.SetupChatMessages = function(cData, NewChatData) {
                 if (picture != "default" && picture != null) {
                     OpenedChatPicture = picture
                 }
-                $(".chitchat-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
+                $(".whatsapp-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
             });
         } else {
-            $(".chitchat-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
+            $(".whatsapp-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
         }
 
-        $(".chitchat-openedchat-name").html("<p>"+cData.name+"</p>");
-        $(".chitchat-openedchat-messages").html("");
+        $(".whatsapp-openedchat-name").html("<p>"+cData.name+"</p>");
+        $(".whatsapp-openedchat-messages").html("");
 
         $.each(cData.messages, function(i, chat){
 
             var ChatDate = FormatChatDate(chat.date);
-            var ChatDiv = '<div class="chitchat-openedchat-messages-'+i+' unique-chat"><div class="chitchat-openedchat-date">'+ChatDate+'</div></div>';
+            var ChatDiv = '<div class="whatsapp-openedchat-messages-'+i+' unique-chat"><div class="whatsapp-openedchat-date">'+ChatDate+'</div></div>';
 
-            $(".chitchat-openedchat-messages").append(ChatDiv);
+            $(".whatsapp-openedchat-messages").append(ChatDiv);
 
             $.each(cData.messages[i].messages, function(index, message){
                 message.message = DOMPurify.sanitize(message.message , {
@@ -294,16 +294,16 @@ QB.Phone.Functions.SetupChatMessages = function(cData, NewChatData) {
                 if (message.sender !== QB.Phone.Data.PlayerData.citizenid) { Sender = "other"; }
                 var MessageElement
                 if (message.type == "message") {
-                    MessageElement = '<div class="chitchat-openedchat-message chitchat-openedchat-message-'+Sender+'">'+message.message+'<div class="chitchat-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
+                    MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+'">'+message.message+'<div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 } else if (message.type == "location") {
-                    MessageElement = '<div class="chitchat-openedchat-message chitchat-openedchat-message-'+Sender+' chitchat-shared-location" data-x="'+message.data.x+'" data-y="'+message.data.y+'"><span style="font-size: 1.2vh;"><i class="fas fa-map-marker-alt" style="font-size: 1vh;"></i> Location</span><div class="chitchat-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
+                    MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+' whatsapp-shared-location" data-x="'+message.data.x+'" data-y="'+message.data.y+'"><span style="font-size: 1.2vh;"><i class="fas fa-map-marker-alt" style="font-size: 1vh;"></i> Location</span><div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 } else if (message.type == "picture") {
-                    MessageElement = '<div class="chitchat-openedchat-message chitchat-openedchat-message-'+Sender+'" data-id='+OpenedChatData.number+'><img class="wppimage" src='+message.data.url +'  style=" border-radius:4px; width: 100%; position:relative; z-index: 1; right:1px;height: auto;"></div><div class="chitchat-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
+                    MessageElement = '<div class="whatsapp-openedchat-message whatsapp-openedchat-message-'+Sender+'" data-id='+OpenedChatData.number+'><img class="wppimage" src='+message.data.url +'  style=" border-radius:4px; width: 100%; position:relative; z-index: 1; right:1px;height: auto;"></div><div class="whatsapp-openedchat-message-time">'+message.time+'</div></div><div class="clearfix"></div>'
                 }
-                $(".chitchat-openedchat-messages-"+i).append(MessageElement);
+                $(".whatsapp-openedchat-messages-"+i).append(MessageElement);
             });
         });
-        $('.chitchat-openedchat-messages').animate({scrollTop: 9999}, 1);
+        $('.whatsapp-openedchat-messages').animate({scrollTop: 9999}, 1);
     } else {
         OpenedChatData.number = NewChatData.number;
         if (OpenedChatPicture == null) {
@@ -314,26 +314,26 @@ QB.Phone.Functions.SetupChatMessages = function(cData, NewChatData) {
                 if (picture != "default" && picture != null) {
                     OpenedChatPicture = picture
                 }
-                $(".chitchat-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
+                $(".whatsapp-openedchat-picture").css({"background-image":"url("+OpenedChatPicture+")"});
             });
         }
 
-        $(".chitchat-openedchat-name").html("<p>"+NewChatData.name+"</p>");
-        $(".chitchat-openedchat-messages").html("");
+        $(".whatsapp-openedchat-name").html("<p>"+NewChatData.name+"</p>");
+        $(".whatsapp-openedchat-messages").html("");
         var NewDate = new Date();
         var NewDateMonth = NewDate.getMonth();
         var NewDateDOM = NewDate.getDate();
         var NewDateYear = NewDate.getFullYear();
         var DateString = ""+NewDateDOM+"-"+(NewDateMonth+1)+"-"+NewDateYear;
-        var ChatDiv = '<div class="chitchat-openedchat-messages-'+DateString+' unique-chat"><div class="chitchat-openedchat-date">TODAY</div></div>';
+        var ChatDiv = '<div class="whatsapp-openedchat-messages-'+DateString+' unique-chat"><div class="whatsapp-openedchat-date">TODAY</div></div>';
 
-        $(".chitchat-openedchat-messages").append(ChatDiv);
+        $(".whatsapp-openedchat-messages").append(ChatDiv);
     }
 
-    $('.chitchat-openedchat-messages').animate({scrollTop: 9999}, 1);
+    $('.whatsapp-openedchat-messages').animate({scrollTop: 9999}, 1);
 }
 
-$(document).on('click', '.chitchat-shared-location', function(e){
+$(document).on('click', '.whatsapp-shared-location', function(e){
     e.preventDefault();
     var messageCoords = {}
     messageCoords.x = $(this).data('x');
@@ -350,19 +350,19 @@ $(document).on('click', '.wppimage', function(e){
    QB.Screen.popUp(source)
 });
 
-$(document).on('click', '#chitchat-openedchat-message-extras', function(e){
+$(document).on('click', '#whatsapp-openedchat-message-extras', function(e){
     e.preventDefault();
 
     if (!ExtraButtonsOpen) {
-        $(".chitchat-extra-buttons").css({"display":"block"}).animate({
+        $(".whatsapp-extra-buttons").css({"display":"block"}).animate({
             left: 0+"vh"
         }, 250);
         ExtraButtonsOpen = true;
     } else {
-        $(".chitchat-extra-buttons").animate({
+        $(".whatsapp-extra-buttons").animate({
             left: -10+"vh"
         }, 250, function(){
-            $(".chitchat-extra-buttons").css({"display":"block"});
+            $(".whatsapp-extra-buttons").css({"display":"block"});
             ExtraButtonsOpen = false;
         });
     }

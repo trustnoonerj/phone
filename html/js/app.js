@@ -71,8 +71,8 @@ QB.Phone.Functions.SetupApplications = function(data) {
             if (app.app == "meos") {
                 icon = '<img src="./img/politie.png" class="ef-app-icon">';
             }
-            if (app.app == "chitchat") {
-                icon = '<img src="./img/apps/chitchat.png" class="ef-app-icon">';
+            if (app.app == "whatsapp") {
+                icon = '<img src="./img/apps/whatsapp.png" class="ef-app-icon">';
             }
             if (app.app == "phone") {
                 icon = '<img src="./img/apps/system_phone.png" class="ef-app-icon">';
@@ -80,8 +80,8 @@ QB.Phone.Functions.SetupApplications = function(data) {
             if (app.app == "settings") {
                 icon = '<img src="./img/apps/system_settings.png" class="ef-app-icon">';
             }
-            if (app.app == "birdy") {
-                icon = '<img src="./img/apps/birdy.png" class="ef-app-icon">';
+            if (app.app == "twitter") {
+                icon = '<img src="./img/apps/twitter.png" class="ef-app-icon">';
             }
             if (app.app == "mail") {
                 icon = '<img src="./img/apps/system_email.png" class="ef-app-icon">';
@@ -228,7 +228,7 @@ $(document).on('click', '.phone-application', function(e){
                 if (PressedApplication == "settings") {
                     $("#myPhoneNumber").text(QB.Phone.Data.PlayerData.charinfo.phone);
                     $("#mySerialNumber").text("QB-" + QB.Phone.Data.PlayerData.metadata["phonedata"].SerialNumber);
-                } else if (PressedApplication == "birdy") {
+                } else if (PressedApplication == "twitter") {
                     $.post('https://qb-phone/GetMentionedTweets', JSON.stringify({}), function(MentionedTweets){
                         QB.Phone.Notifications.LoadMentionedTweets(MentionedTweets)
                     })
@@ -248,9 +248,9 @@ $(document).on('click', '.phone-application', function(e){
                     $.post('https://qb-phone/GetInvoices', JSON.stringify({}), function(invoices){
                         QB.Phone.Functions.LoadBankInvoices(invoices);
                     });
-                } else if (PressedApplication == "chitchat") {
-                    $.post('https://qb-phone/GetchitchatChats', JSON.stringify({}), function(chats){
-                        QB.Phone.Functions.LoadchitchatChats(chats);
+                } else if (PressedApplication == "whatsapp") {
+                    $.post('https://qb-phone/GetwhatsappChats', JSON.stringify({}), function(chats){
+                        QB.Phone.Functions.LoadwhatsappChats(chats);
                     });
                 } else if (PressedApplication == "phone") {
                     $.post('https://qb-phone/GetMissedCalls', JSON.stringify({}), function(recent){
@@ -377,17 +377,17 @@ $(document).on('click', '.phone-home-container', function(event){
         }, 400)
         QB.Phone.Functions.HeaderTextColor("white", 300);
 
-        if (QB.Phone.Data.currentApplication == "chitchat") {
+        if (QB.Phone.Data.currentApplication == "whatsapp") {
             if (OpenedChatData.number !== null) {
                 setTimeout(function(){
-                    $(".chitchat-chats").css({"display":"block"});
-                    $(".chitchat-chats").animate({
+                    $(".whatsapp-chats").css({"display":"block"});
+                    $(".whatsapp-chats").animate({
                         left: 0+"vh"
                     }, 1);
-                    $(".chitchat-openedchat").animate({
+                    $(".whatsapp-openedchat").animate({
                         left: -30+"vh"
                     }, 1, function(){
-                        $(".chitchat-openedchat").css({"display":"none"});
+                        $(".whatsapp-openedchat").css({"display":"none"});
                     });
                     OpenedChatPicture = null;
                     OpenedChatData.number = null;
@@ -439,23 +439,23 @@ QB.Phone.Functions.ToggleApp = function(app, show) {
 
 QB.Phone.Functions.Close = function() {
 
-    if (QB.Phone.Data.currentApplication == "chitchat") {
+    if (QB.Phone.Data.currentApplication == "whatsapp") {
         setTimeout(function(){
             QB.Phone.Animations.TopSlideUp('.phone-application-container', 400, -160);
             QB.Phone.Animations.TopSlideUp('.'+QB.Phone.Data.currentApplication+"-app", 400, -160);
-            $(".chitchat-app").css({"display":"none"});
+            $(".whatsapp-app").css({"display":"none"});
             QB.Phone.Functions.HeaderTextColor("white", 300);
 
             if (OpenedChatData.number !== null) {
                 setTimeout(function(){
-                    $(".chitchat-chats").css({"display":"block"});
-                    $(".chitchat-chats").animate({
+                    $(".whatsapp-chats").css({"display":"block"});
+                    $(".whatsapp-chats").animate({
                         left: 0+"vh"
                     }, 1);
-                    $(".chitchat-openedchat").animate({
+                    $(".whatsapp-openedchat").animate({
                         left: 0+"vh"
                     }, 1, function(){
-                        $(".chitchat-openedchat").css({"display":"none"});
+                        $(".whatsapp-openedchat").css({"display":"none"});
                     });
                     OpenedChatData.number = null;
                 }, 450);
@@ -723,19 +723,19 @@ $(document).ready(function(){
                 $(".bank-app-account-balance").data('balance', event.data.NewBalance);
                 break;
             case "UpdateChat":
-                if (QB.Phone.Data.currentApplication == "chitchat") {
+                if (QB.Phone.Data.currentApplication == "whatsapp") {
                     if (OpenedChatData.number !== null && OpenedChatData.number == event.data.chatNumber) {
                         QB.Phone.Functions.SetupChatMessages(event.data.chatData);
                     } else {
-                        QB.Phone.Functions.LoadchitchatChats(event.data.Chats);
+                        QB.Phone.Functions.LoadwhatsappChats(event.data.Chats);
                     }
                 }
                 break;
             case "UpdateHashtags":
                 QB.Phone.Notifications.LoadHashtags(event.data.Hashtags);
                 break;
-            case "RefreshchitchatAlerts":
-                QB.Phone.Functions.ReloadchitchatAlerts(event.data.Chats);
+            case "RefreshwhatsappAlerts":
+                QB.Phone.Functions.ReloadwhatsappAlerts(event.data.Chats);
                 break;
             case "CancelOutgoingCall":
                 $.post('https://qb-phone/HasPhone', JSON.stringify({}), function(HasPhone){
@@ -806,7 +806,7 @@ $(document).ready(function(){
                 }
                 break;
             case "UpdateTweets":
-                if (QB.Phone.Data.currentApplication == "birdy") {
+                if (QB.Phone.Data.currentApplication == "twitter") {
                     QB.Phone.Notifications.LoadTweets(event.data.Tweets);
                 }
                 break;

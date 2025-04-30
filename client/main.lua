@@ -607,7 +607,7 @@ RegisterNUICallback('GetMails', function(_, cb)
     cb(PhoneData.Mails)
 end)
 
-RegisterNUICallback('GetchitchatChat', function(data, cb)
+RegisterNUICallback('GetwhatsappChat', function(data, cb)
     if PhoneData.Chats[data.phone] ~= nil then
         cb(PhoneData.Chats[data.phone])
     else
@@ -641,9 +641,9 @@ RegisterNUICallback('SharedLocation', function(data, cb)
     SendNUIMessage({
         action = "PhoneNotification",
         PhoneNotify = {
-            title = "chitchat",
+            title = "whatsapp",
             text = "Location has been set!",
-            icon = "fab fa-chitchat",
+            icon = "fab fa-whatsapp",
             color = "#25D366",
             timeout = 1500,
         },
@@ -674,14 +674,14 @@ RegisterNUICallback('ClearAlerts', function(data, cb)
     local ChatKey = GetKeyByNumber(chat)
 
     if PhoneData.Chats[ChatKey].Unread ~= nil then
-        local newAlerts = (Config.PhoneApplications['chitchat'].Alerts - PhoneData.Chats[ChatKey].Unread)
-        Config.PhoneApplications['chitchat'].Alerts = newAlerts
-        TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "chitchat", newAlerts)
+        local newAlerts = (Config.PhoneApplications['whatsapp'].Alerts - PhoneData.Chats[ChatKey].Unread)
+        Config.PhoneApplications['whatsapp'].Alerts = newAlerts
+        TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "whatsapp", newAlerts)
 
         PhoneData.Chats[ChatKey].Unread = 0
 
         SendNUIMessage({
-            action = "RefreshchitchatAlerts",
+            action = "RefreshwhatsappAlerts",
             Chats = PhoneData.Chats,
         })
         SendNUIMessage({ action = "RefreshAppAlerts", AppData = Config.PhoneApplications })
@@ -765,9 +765,9 @@ RegisterNUICallback('PostNewTweet', function(data, cb)
         url = data.url
     }
 
-    local birdyMessage = data.Message
-    local MentionTag = birdyMessage:split("@")
-    local Hashtag = birdyMessage:split("#")
+    local twitterMessage = data.Message
+    local MentionTag = twitterMessage:split("@")
+    local Hashtag = twitterMessage:split("#")
     if #Hashtag <= 3 then
         for i = 2, #Hashtag, 1 do
             local Handle = Hashtag[i]:split(" ")[1]
@@ -805,9 +805,9 @@ RegisterNUICallback('PostNewTweet', function(data, cb)
         SendNUIMessage({
             action = "PhoneNotification",
             PhoneNotify = {
-                title = "birdy",
+                title = "twitter",
                 text = "Invalid Tweet",
-                icon = "fab fa-birdy",
+                icon = "fab fa-twitter",
                 color = "#1DA1F2",
                 timeout = 1000,
             },
@@ -1183,12 +1183,12 @@ RegisterNUICallback('SetupStoreApps', function(_, cb)
 end)
 
 RegisterNUICallback('ClearMentions', function(_ ,cb)
-    Config.PhoneApplications["birdy"].Alerts = 0
+    Config.PhoneApplications["twitter"].Alerts = 0
     SendNUIMessage({
         action = "RefreshAppAlerts",
         AppData = Config.PhoneApplications
     })
-    TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "birdy", 0)
+    TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "twitter", 0)
     SendNUIMessage({ action = "RefreshAppAlerts", AppData = Config.PhoneApplications })
     cb('ok')
 end)
@@ -1244,7 +1244,7 @@ RegisterNUICallback('CanTransferMoney', function(data, cb)
     end
 end)
 
-RegisterNUICallback('GetchitchatChats', function(_, cb)
+RegisterNUICallback('GetwhatsappChats', function(_, cb)
     QBCore.Functions.TriggerCallback('qb-phone:server:GetContactPictures', function(Chats)
         cb(Chats)
     end, PhoneData.Chats)
@@ -1536,7 +1536,7 @@ RegisterNetEvent('qb-phone:client:UpdateTweets', function(src, Tweets, NewTweetD
                 PhoneNotify = {
                     title = "New Tweet (@"..NewTweetData.firstName.." "..NewTweetData.lastName..")",
                     text = "A new tweet as been posted.",
-                    icon = "fab fa-birdy",
+                    icon = "fab fa-twitter",
                     color = "#1DA1F2",
                 },
             })
@@ -1548,9 +1548,9 @@ RegisterNetEvent('qb-phone:client:UpdateTweets', function(src, Tweets, NewTweetD
             SendNUIMessage({
                 action = "PhoneNotification",
                 PhoneNotify = {
-                    title = "birdy",
+                    title = "twitter",
                     text = "The Tweet has been posted!",
-                    icon = "fab fa-birdy",
+                    icon = "fab fa-twitter",
                     color = "#1DA1F2",
                     timeout = 1000,
                 },
@@ -1561,9 +1561,9 @@ RegisterNetEvent('qb-phone:client:UpdateTweets', function(src, Tweets, NewTweetD
             SendNUIMessage({
                 action = "PhoneNotification",
                 PhoneNotify = {
-                    title = "birdy",
+                    title = "twitter",
                     text = "The Tweet has been deleted!",
-                    icon = "fab fa-birdy",
+                    icon = "fab fa-twitter",
                     color = "#1DA1F2",
                     timeout = 1000,
                 },
@@ -1841,9 +1841,9 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
                 SendNUIMessage({
                     action = "PhoneNotification",
                     PhoneNotify = {
-                        title = "chitchat",
+                        title = "whatsapp",
                         text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-                        icon = "fab fa-chitchat",
+                        icon = "fab fa-whatsapp",
                         color = "#25D366",
                         timeout = 1500,
                     },
@@ -1852,9 +1852,9 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
                 SendNUIMessage({
                     action = "PhoneNotification",
                     PhoneNotify = {
-                        title = "chitchat",
+                        title = "whatsapp",
                         text = "Messaged yourself",
-                        icon = "fab fa-chitchat",
+                        icon = "fab fa-whatsapp",
                         color = "#25D366",
                         timeout = 4000,
                     },
@@ -1877,15 +1877,15 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
 	    SendNUIMessage({
 	        action = "PhoneNotification",
 	        PhoneNotify = {
-		    title = "chitchat",
+		    title = "whatsapp",
 		    text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-		    icon = "fab fa-chitchat",
+		    icon = "fab fa-whatsapp",
 		    color = "#25D366",
 		    timeout = 3500,
 	        },
 	    })
-            Config.PhoneApplications['chitchat'].Alerts = Config.PhoneApplications['chitchat'].Alerts + 1
-            TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "chitchat")
+            Config.PhoneApplications['whatsapp'].Alerts = Config.PhoneApplications['whatsapp'].Alerts + 1
+            TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "whatsapp")
         end
     else
         PhoneData.Chats[NumberKey].messages = ChatMessages
@@ -1901,9 +1901,9 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
                 SendNUIMessage({
                     action = "PhoneNotification",
                     PhoneNotify = {
-                        title = "chitchat",
+                        title = "whatsapp",
                         text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-                        icon = "fab fa-chitchat",
+                        icon = "fab fa-whatsapp",
                         color = "#25D366",
                         timeout = 1500,
                     },
@@ -1912,9 +1912,9 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
                 SendNUIMessage({
                     action = "PhoneNotification",
                     PhoneNotify = {
-                        title = "chitchat",
+                        title = "whatsapp",
                         text = "Messaged yourself",
-                        icon = "fab fa-chitchat",
+                        icon = "fab fa-whatsapp",
                         color = "#25D366",
                         timeout = 4000,
                     },
@@ -1937,9 +1937,9 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
             SendNUIMessage({
                 action = "PhoneNotification",
                 PhoneNotify = {
-                    title = "chitchat",
+                    title = "whatsapp",
                     text = "New message from "..IsNumberInContacts(SenderNumber).."!",
-                    icon = "fab fa-chitchat",
+                    icon = "fab fa-whatsapp",
                     color = "#25D366",
                     timeout = 3500,
                 },
@@ -1948,8 +1948,8 @@ RegisterNetEvent('qb-phone:client:UpdateMessages', function(ChatMessages, Sender
             NumberKey = GetKeyByNumber(SenderNumber)
             ReorganizeChats(NumberKey)
 
-            Config.PhoneApplications['chitchat'].Alerts = Config.PhoneApplications['chitchat'].Alerts + 1
-            TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "chitchat")
+            Config.PhoneApplications['whatsapp'].Alerts = Config.PhoneApplications['whatsapp'].Alerts + 1
+            TriggerServerEvent('qb-phone:server:SetPhoneAlerts', "whatsapp")
         end
     end
 end)
@@ -2114,8 +2114,8 @@ RegisterNetEvent('qb-phone:client:UpdateLapraces', function()
 end)
 
 RegisterNetEvent('qb-phone:client:GetMentioned', function(TweetMessage, AppAlerts)
-    Config.PhoneApplications["birdy"].Alerts = AppAlerts
-    SendNUIMessage({ action = "PhoneNotification", PhoneNotify = { title = "You have been mentioned in a Tweet!", text = TweetMessage.message, icon = "fab fa-birdy", color = "#1DA1F2", }, })
+    Config.PhoneApplications["twitter"].Alerts = AppAlerts
+    SendNUIMessage({ action = "PhoneNotification", PhoneNotify = { title = "You have been mentioned in a Tweet!", text = TweetMessage.message, icon = "fab fa-twitter", color = "#1DA1F2", }, })
     TweetMessage = {firstName = TweetMessage.firstName, lastName = TweetMessage.lastName, message = escape_str(TweetMessage.message), time = TweetMessage.time, picture = TweetMessage.picture}
     PhoneData.MentionedTweets[#PhoneData.MentionedTweets+1] = TweetMessage
     SendNUIMessage({ action = "RefreshAppAlerts", AppData = Config.PhoneApplications })
