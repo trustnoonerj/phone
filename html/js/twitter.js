@@ -1,61 +1,61 @@
-var CurrentTwitterTab = "twitter-home"
+var CurrentbirdyTab = "birdy-home"
 var HashtagOpen = false;
 var MinimumTrending = 100;
 
-$(document).on('click', '.twitter-header-tab', function(e){
+$(document).on('click', '.birdy-header-tab', function(e){
     e.preventDefault();
 
-    var PressedTwitterTab = $(this).data('twittertab');
-    var PreviousTwitterTabObject = $('.twitter-header').find('[data-twittertab="'+CurrentTwitterTab+'"]');
+    var PressedbirdyTab = $(this).data('birdytab');
+    var PreviousbirdyTabObject = $('.birdy-header').find('[data-birdytab="'+CurrentbirdyTab+'"]');
 
-    if (PressedTwitterTab !== CurrentTwitterTab) {
-        $(this).addClass('selected-twitter-header-tab');
-        $(PreviousTwitterTabObject).removeClass('selected-twitter-header-tab');
+    if (PressedbirdyTab !== CurrentbirdyTab) {
+        $(this).addClass('selected-birdy-header-tab');
+        $(PreviousbirdyTabObject).removeClass('selected-birdy-header-tab');
 
-        $("."+CurrentTwitterTab+"-tab").css({"display":"none"});
-        $("."+PressedTwitterTab+"-tab").css({"display":"block"});
+        $("."+CurrentbirdyTab+"-tab").css({"display":"none"});
+        $("."+PressedbirdyTab+"-tab").css({"display":"block"});
 
-        if (PressedTwitterTab === "twitter-mentions") {
+        if (PressedbirdyTab === "birdy-mentions") {
             $.post('https://qb-phone/ClearMentions');
         }
 
-        if (PressedTwitterTab == "twitter-home") {
+        if (PressedbirdyTab == "birdy-home") {
             $.post('https://qb-phone/GetTweets', JSON.stringify({}), function(Tweets){
                 QB.Phone.Notifications.LoadTweets(Tweets);
             });
         }
 
-        CurrentTwitterTab = PressedTwitterTab;
+        CurrentbirdyTab = PressedbirdyTab;
 
         if (HashtagOpen) {
             event.preventDefault();
 
-            $(".twitter-hashtag-tweets").css({"left": "30vh"});
-            $(".twitter-hashtags").css({"left": "0vh"});
-            $(".twitter-new-tweet").css({"display":"block"});
-            $(".twitter-hashtags").css({"display":"block"});
+            $(".birdy-hashtag-tweets").css({"left": "30vh"});
+            $(".birdy-hashtags").css({"left": "0vh"});
+            $(".birdy-new-tweet").css({"display":"block"});
+            $(".birdy-hashtags").css({"display":"block"});
             HashtagOpen = false;
         }
-    } else if (CurrentTwitterTab == "twitter-hashtags" && PressedTwitterTab == "twitter-hashtags") {
+    } else if (CurrentbirdyTab == "birdy-hashtags" && PressedbirdyTab == "birdy-hashtags") {
         if (HashtagOpen) {
             event.preventDefault();
 
-            $(".twitter-hashtags").css({"display":"block"});
-            $(".twitter-hashtag-tweets").animate({
+            $(".birdy-hashtags").css({"display":"block"});
+            $(".birdy-hashtag-tweets").animate({
                 left: 30+"vh"
             }, 150);
-            $(".twitter-hashtags").animate({
+            $(".birdy-hashtags").animate({
                 left: 0+"vh"
             }, 150);
             HashtagOpen = false;
         }
-    } else if (CurrentTwitterTab == "twitter-home" && PressedTwitterTab == "twitter-home") {
+    } else if (CurrentbirdyTab == "birdy-home" && PressedbirdyTab == "birdy-home") {
         event.preventDefault();
 
         $.post('https://qb-phone/GetTweets', JSON.stringify({}), function(Tweets){
             QB.Phone.Notifications.LoadTweets(Tweets);
         });
-    } else if (CurrentTwitterTab == "twitter-mentions" && PressedTwitterTab == "twitter-mentions") {
+    } else if (CurrentbirdyTab == "birdy-mentions" && PressedbirdyTab == "birdy-mentions") {
         event.preventDefault();
 
         $.post('https://qb-phone/GetMentionedTweets', JSON.stringify({}), function(MentionedTweets){
@@ -64,10 +64,10 @@ $(document).on('click', '.twitter-header-tab', function(e){
     }
 });
 
-$(document).on('click', '.twitter-new-tweet', function(e){
+$(document).on('click', '.birdy-new-tweet', function(e){
     e.preventDefault();
 
-    QB.Phone.Animations.TopSlideDown(".twitter-new-tweet-tab", 450, 0);
+    QB.Phone.Animations.TopSlideDown(".birdy-new-tweet-tab", 450, 0);
 });
 
 $(document).on('click', '#take-pic', function (e) {
@@ -83,37 +83,37 @@ $(document).on('click', '#take-pic', function (e) {
 QB.Phone.Notifications.LoadTweets = function(Tweets) {
     Tweets = Tweets.reverse();
     if (Tweets !== null && Tweets !== undefined && Tweets !== "" && Tweets.length > 0) {
-        $(".twitter-home-tab").html("");
+        $(".birdy-home-tab").html("");
         $.each(Tweets, function(i, Tweet){
             var clean = DOMPurify.sanitize(Tweet.message , {
                 ALLOWED_TAGS: [],
                 ALLOWED_ATTR: []
             });
             if (clean == '') clean = 'Hmm, I shouldn\'t be able to do this...'
-            var TwtMessage = QB.Phone.Functions.FormatTwitterMessage(clean);
+            var TwtMessage = QB.Phone.Functions.FormatbirdyMessage(clean);
             var TimeAgo = moment(Tweet.date).format('MM/DD/YYYY hh:mm');
 
-            var TwitterHandle = Tweet.firstName + ' ' + Tweet.lastName
+            var birdyHandle = Tweet.firstName + ' ' + Tweet.lastName
             var PictureUrl = "./img/avatar.png"
             if (Tweet.picture !== "default") {
                 PictureUrl = Tweet.picture
             }
 
             if (Tweet.url == "") {
-                let TweetElement = '<div class="twitter-tweet" data-twtcid="'+Tweet.citizenid+'" data-twtid ="'+Tweet.tweetId+'" data-twthandler="@' + TwitterHandle.replace(" ", "_") + '"><div class="tweet-reply"><i class="fas fa-reply"></i></div>' +
-                    '<div class="tweet-tweeter">' + Tweet.firstName + ' ' + Tweet.lastName + ' &nbsp;<span>@' + TwitterHandle.replace(" ", "_") + ' &middot; ' + TimeAgo + '</span></div>' +
+                let TweetElement = '<div class="birdy-tweet" data-twtcid="'+Tweet.citizenid+'" data-twtid ="'+Tweet.tweetId+'" data-twthandler="@' + birdyHandle.replace(" ", "_") + '"><div class="tweet-reply"><i class="fas fa-reply"></i></div>' +
+                    '<div class="tweet-tweeter">' + Tweet.firstName + ' ' + Tweet.lastName + ' &nbsp;<span>@' + birdyHandle.replace(" ", "_") + ' &middot; ' + TimeAgo + '</span></div>' +
                     '<div class="tweet-message">' + TwtMessage + '</div>' +
                     '<div class="twt-img" style="top: 1vh;"><img src="' + PictureUrl + '" class="tweeter-image"></div>' +
                     '</div>';
-                    $(".twitter-home-tab").append(TweetElement);
+                    $(".birdy-home-tab").append(TweetElement);
             } else {
-                let TweetElement = '<div class="twitter-tweet" data-twthandler="@'+TwitterHandle.replace(" ", "_")+'"><div class="tweet-reply"><i class="fas fa-reply"></i></div>'+
-                    '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+TwitterHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
+                let TweetElement = '<div class="birdy-tweet" data-twthandler="@'+birdyHandle.replace(" ", "_")+'"><div class="tweet-reply"><i class="fas fa-reply"></i></div>'+
+                    '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+birdyHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
                     '<div class="tweet-message">'+TwtMessage+'</div>'+
                     '<img class="image" src= ' + Tweet.url + ' style = " border-radius:4px; width: 70%; position:relative; z-index: 1; left:52px; margin:.6rem .5rem .6rem 1rem;height: auto; padding-bottom: 15px;">' +
                     '<div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div>' +
                     '</div>';
-                $(".twitter-home-tab").append(TweetElement);
+                $(".birdy-home-tab").append(TweetElement);
             }
             // if (Tweet.citizenid === QB.Phone.Data.PlayerData.citizenid){
             //     $(".tweet-message").append('<span><div class="twt-icon"><i class="fas fa-trash"style="position:absolute; right:2%; font-size: 1.5rem; z-index:4;" id ="twt-delete-click"></i></div>')
@@ -124,7 +124,7 @@ QB.Phone.Notifications.LoadTweets = function(Tweets) {
 
 $(document).on('click','#twt-delete-click',function(e){
     e.preventDefault();
-    let source = $('.twitter-tweet').data('twtid')
+    let source = $('.birdy-tweet').data('twtid')
     $(this).parent().parent().parent().parent().remove()
     $.post('https://qb-phone/DeleteTweet', JSON.stringify({id: source}))
 })
@@ -134,43 +134,43 @@ $(document).on('click', '.tweet-reply', function(e){
     var TwtName = $(this).parent().data('twthandler');
     $('#tweet-new-url').val("");
     $("#tweet-new-message").val(TwtName + " ");
-    QB.Phone.Animations.TopSlideDown(".twitter-new-tweet-tab", 450, 0);
+    QB.Phone.Animations.TopSlideDown(".birdy-new-tweet-tab", 450, 0);
 });
 
 QB.Phone.Notifications.LoadMentionedTweets = function(Tweets) {
     Tweets = Tweets.reverse();
     $('#tweet-new-url').val("");
     if (Tweets.length > 0) {
-        $(".twitter-mentions-tab").html("");
+        $(".birdy-mentions-tab").html("");
         $.each(Tweets, function(i, Tweet){
             var clean = DOMPurify.sanitize(Tweet.message , {
                 ALLOWED_TAGS: [],
                 ALLOWED_ATTR: []
             });
             if (clean == '') clean = 'Hmm, I shouldn\'t be able to do this...'
-            var TwtMessage = QB.Phone.Functions.FormatTwitterMessage(clean);
+            var TwtMessage = QB.Phone.Functions.FormatbirdyMessage(clean);
             var TimeAgo = moment(Tweet.date).format('MM/DD/YYYY hh:mm');
 
-            var TwitterHandle = Tweet.firstName + ' ' + Tweet.lastName
+            var birdyHandle = Tweet.firstName + ' ' + Tweet.lastName
             var PictureUrl = "./img/avatar.png";
             if (Tweet.picture !== "default") {
                 PictureUrl = Tweet.picture
             }
 
             var TweetElement =
-            '<div class="twitter-tweet">'+
-                '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+TwitterHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
+            '<div class="birdy-tweet">'+
+                '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+birdyHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
                 '<div class="tweet-message">'+TwtMessage+'</div>'+
             '<div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div></div>';
 
-            $(".twitter-mentioned-tweet").css({"background-color":"#F5F8FA"});
-            $(".twitter-mentions-tab").append(TweetElement);
+            $(".birdy-mentioned-tweet").css({"background-color":"#F5F8FA"});
+            $(".birdy-mentions-tab").append(TweetElement);
         });
     }
 }
 
-QB.Phone.Functions.FormatTwitterMessage = function(TwitterMessage) {
-    var TwtMessage = TwitterMessage;
+QB.Phone.Functions.FormatbirdyMessage = function(birdyMessage) {
+    var TwtMessage = birdyMessage;
     var res = TwtMessage.split("@");
     var tags = TwtMessage.split("#");
     var InvalidSymbols = [
@@ -226,9 +226,9 @@ $(document).on('click', '#send-tweet', function(e){
         $.post('https://qb-phone/GetHashtags', JSON.stringify({}), function(Hashtags){
             QB.Phone.Notifications.LoadHashtags(Hashtags)
         })
-        QB.Phone.Animations.TopSlideUp(".twitter-new-tweet-tab", 450, -120);
+        QB.Phone.Animations.TopSlideUp(".birdy-new-tweet-tab", 450, -120);
     } else {
-        QB.Phone.Notifications.Add("fab fa-twitter", "Twitter", "Fill a message!", "#1DA1F2");
+        QB.Phone.Notifications.Add("fab fa-birdy", "birdy", "Fill a message!", "#1DA1F2");
     };
     $('#tweet-new-url').val("");
     $("#tweet-new-message").val("");
@@ -237,7 +237,7 @@ $(document).on('click', '#send-tweet', function(e){
 $(document).on('click', '#cancel-tweet', function(e){
     e.preventDefault();
     $('#tweet-new-url').html("");
-    QB.Phone.Animations.TopSlideUp(".twitter-new-tweet-tab", 450, -120);
+    QB.Phone.Animations.TopSlideUp(".birdy-new-tweet-tab", 450, -120);
 });
 
 $(document).on('click', '.image', function(e){
@@ -255,25 +255,25 @@ $(document).on('click', '.hashtag-tag-text', function(e){
     e.preventDefault();
     if (!HashtagOpen) {
         var Hashtag = $(this).data('hashtag');
-        var PreviousTwitterTabObject = $('.twitter-header').find('[data-twittertab="'+CurrentTwitterTab+'"]');
+        var PreviousbirdyTabObject = $('.birdy-header').find('[data-birdytab="'+CurrentbirdyTab+'"]');
 
-        $("#twitter-hashtags").addClass('selected-twitter-header-tab');
-        $(PreviousTwitterTabObject).removeClass('selected-twitter-header-tab');
+        $("#birdy-hashtags").addClass('selected-birdy-header-tab');
+        $(PreviousbirdyTabObject).removeClass('selected-birdy-header-tab');
 
-        $("."+CurrentTwitterTab+"-tab").css({"display":"none"});
-        $(".twitter-hashtags-tab").css({"display":"block"});
+        $("."+CurrentbirdyTab+"-tab").css({"display":"none"});
+        $(".birdy-hashtags-tab").css({"display":"block"});
 
         $.post('https://qb-phone/GetHashtagMessages', JSON.stringify({hashtag: Hashtag}), function(HashtagData){
             QB.Phone.Notifications.LoadHashtagMessages(HashtagData.messages);
         });
 
-        $(".twitter-hashtag-tweets").css({"display":"block", "left":"30vh"});
-        $(".twitter-hashtag-tweets").css({"left": "0vh"});
-        $(".twitter-hashtags").css({"left": "-30vh"});
-        $(".twitter-hashtags").css({"display":"none"});
+        $(".birdy-hashtag-tweets").css({"display":"block", "left":"30vh"});
+        $(".birdy-hashtag-tweets").css({"left": "0vh"});
+        $(".birdy-hashtags").css({"left": "-30vh"});
+        $(".birdy-hashtags").css({"display":"none"});
         HashtagOpen = true;
 
-        CurrentTwitterTab = "twitter-hashtags";
+        CurrentbirdyTab = "birdy-hashtags";
     }
 });
 
@@ -281,14 +281,14 @@ function CopyMentionTag(elem) {
     var $temp = $("<input>");
     $("body").append($temp);
     $temp.val($(elem).data('mentiontag')).select();
-    QB.Phone.Notifications.Add("fab fa-twitter", "Twitter", $(elem).data('mentiontag')+ " copied!", "rgb(27, 149, 224)", 1250);
+    QB.Phone.Notifications.Add("fab fa-birdy", "birdy", $(elem).data('mentiontag')+ " copied!", "rgb(27, 149, 224)", 1250);
     document.execCommand("copy");
     $temp.remove();
 }
 
 QB.Phone.Notifications.LoadHashtags = function(hashtags) {
     if (hashtags !== null) {
-        $(".twitter-hashtags").html("");
+        $(".birdy-hashtags").html("");
 
         $.each(hashtags, function(i, hashtag){
             var Elem = '';
@@ -297,12 +297,12 @@ QB.Phone.Notifications.LoadHashtags = function(hashtags) {
                TweetHandle = "Tweets";
             }
             if (hashtag.messages.length >= MinimumTrending) {
-                Elem = '<div class="twitter-hashtag" id="tag-'+hashtag.hashtag+'"><div class="twitter-hashtag-status">Trending in City</div> <div class="twitter-hashtag-tag">#'+hashtag.hashtag+'</div> <div class="twitter-hashtag-messages">'+hashtag.messages.length+' '+TweetHandle+'</div> </div>';
+                Elem = '<div class="birdy-hashtag" id="tag-'+hashtag.hashtag+'"><div class="birdy-hashtag-status">Trending in City</div> <div class="birdy-hashtag-tag">#'+hashtag.hashtag+'</div> <div class="birdy-hashtag-messages">'+hashtag.messages.length+' '+TweetHandle+'</div> </div>';
             } else {
-                Elem = '<div class="twitter-hashtag" id="tag-'+hashtag.hashtag+'"><div class="twitter-hashtag-status">Not trending in City</div> <div class="twitter-hashtag-tag">#'+hashtag.hashtag+'</div> <div class="twitter-hashtag-messages">'+hashtag.messages.length+' '+TweetHandle+'</div> </div>';
+                Elem = '<div class="birdy-hashtag" id="tag-'+hashtag.hashtag+'"><div class="birdy-hashtag-status">Not trending in City</div> <div class="birdy-hashtag-tag">#'+hashtag.hashtag+'</div> <div class="birdy-hashtag-messages">'+hashtag.messages.length+' '+TweetHandle+'</div> </div>';
             }
 
-            $(".twitter-hashtags").append(Elem);
+            $(".birdy-hashtags").append(Elem);
             $("#tag-"+hashtag.hashtag).data('tagData', hashtag);
         });
     }
@@ -311,35 +311,35 @@ QB.Phone.Notifications.LoadHashtags = function(hashtags) {
 QB.Phone.Notifications.LoadHashtagMessages = function(Tweets) {
     Tweets = Tweets.reverse();
     if (Tweets !== null && Tweets !== undefined && Tweets !== "" && Tweets.length > 0) {
-        $(".twitter-hashtag-tweets").html("");
+        $(".birdy-hashtag-tweets").html("");
         $.each(Tweets, function(i, Tweet){
             var clean = DOMPurify.sanitize(Tweet.message , {
                 ALLOWED_TAGS: [],
                 ALLOWED_ATTR: []
             });
             if (clean == '') clean = 'Hmm, I shouldn\'t be able to do this...'
-            var TwtMessage = QB.Phone.Functions.FormatTwitterMessage(clean);
+            var TwtMessage = QB.Phone.Functions.FormatbirdyMessage(clean);
             var TimeAgo = moment(Tweet.date).format('MM/DD/YYYY hh:mm');
 
-            var TwitterHandle = Tweet.firstName + ' ' + Tweet.lastName
+            var birdyHandle = Tweet.firstName + ' ' + Tweet.lastName
             var PictureUrl = "./img/avatar.png"
             if (Tweet.picture !== "default") {
                 PictureUrl = Tweet.picture
             }
 
             var TweetElement =
-            '<div class="twitter-tweet">'+
-                '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+TwitterHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
+            '<div class="birdy-tweet">'+
+                '<div class="tweet-tweeter">'+Tweet.firstName+' '+Tweet.lastName+' &nbsp;<span>@'+birdyHandle.replace(" ", "_")+' &middot; '+TimeAgo+'</span></div>'+
                 '<div class="tweet-message">'+TwtMessage+'</div>'+
             '<div class="twt-img" style="top: 1vh;"><img src="'+PictureUrl+'" class="tweeter-image"></div></div>';
 
-            $(".twitter-hashtag-tweets").append(TweetElement);
+            $(".birdy-hashtag-tweets").append(TweetElement);
         });
     }
 }
 
 
-$(document).on('click', '.twitter-hashtag', function(event){
+$(document).on('click', '.birdy-hashtag', function(event){
     event.preventDefault();
 
     var TweetId = $(this).attr('id');
@@ -347,14 +347,14 @@ $(document).on('click', '.twitter-hashtag', function(event){
 
     QB.Phone.Notifications.LoadHashtagMessages(TweetData.messages);
 
-    $(".twitter-hashtag-tweets").css({"display":"block", "left":"30vh"});
-    $(".twitter-hashtag-tweets").animate({
+    $(".birdy-hashtag-tweets").css({"display":"block", "left":"30vh"});
+    $(".birdy-hashtag-tweets").animate({
         left: 0+"vh"
     }, 150);
-    $(".twitter-hashtags").animate({
+    $(".birdy-hashtags").animate({
         left: -30+"vh"
     }, 150, function(){
-        $(".twitter-hashtags").css({"display":"none"});
+        $(".birdy-hashtags").css({"display":"none"});
     });
     HashtagOpen = true;
 });

@@ -120,10 +120,10 @@ $(document).on('click', '#tweet-button', function(e){
         $.post('https://qb-phone/GetHashtags', JSON.stringify({}), function(Hashtags){
             QB.Phone.Notifications.LoadHashtags(Hashtags)
         })
-        // QB.Phone.Animations.TopSlideUp(".twitter-new-tweet-tab", 450, -120);
+        // QB.Phone.Animations.TopSlideUp(".birdy-new-tweet-tab", 450, -120);
         returnDetail()
     } else {
-        QB.Phone.Notifications.Add("fab fa-twitter", "Twitter", "Fill a message!", "#1DA1F2");
+        QB.Phone.Notifications.Add("fab fa-birdy", "birdy", "Fill a message!", "#1DA1F2");
     };
     $('#tweet-new-url').val("");
     $("#tweet-new-message").val("");

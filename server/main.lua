@@ -718,16 +718,16 @@ RegisterNetEvent('qb-phone:server:MentionedPlayer', function(firstName, lastName
         local Player = QBCore.Functions.GetPlayer(v)
         if Player ~= nil then
             if (Player.PlayerData.charinfo.firstname == firstName and Player.PlayerData.charinfo.lastname == lastName) then
-                QBPhone.SetPhoneAlerts(Player.PlayerData.citizenid, "twitter")
+                QBPhone.SetPhoneAlerts(Player.PlayerData.citizenid, "birdy")
                 QBPhone.AddMentionedTweet(Player.PlayerData.citizenid, TweetMessage)
-                TriggerClientEvent('qb-phone:client:GetMentioned', Player.PlayerData.source, TweetMessage, AppAlerts[Player.PlayerData.citizenid]["twitter"])
+                TriggerClientEvent('qb-phone:client:GetMentioned', Player.PlayerData.source, TweetMessage, AppAlerts[Player.PlayerData.citizenid]["birdy"])
             else
                 local query1 = '%' .. firstName .. '%'
                 local query2 = '%' .. lastName .. '%'
                 local result = MySQL.query.await('SELECT * FROM players WHERE charinfo LIKE ? AND charinfo LIKE ?', {query1, query2})
                 if result[1] ~= nil then
                     local MentionedTarget = result[1].citizenid
-                    QBPhone.SetPhoneAlerts(MentionedTarget, "twitter")
+                    QBPhone.SetPhoneAlerts(MentionedTarget, "birdy")
                     QBPhone.AddMentionedTweet(MentionedTarget, TweetMessage)
                 end
             end

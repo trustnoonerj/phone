@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
-.twitter-app {
+.birdy-app {
     display: none;
     height: 100%;
     width: 100%;
@@ -8,7 +8,7 @@
     overflow: hidden;
 }
 
-.twitter-header {
+.birdy-header {
     position: absolute;
     top: 5vh;
     width: 100%;
@@ -16,7 +16,7 @@
     border-bottom: .2vh solid rgba(20, 23, 26, 0.37);
 }
 
-.twitter-header-tab {
+.birdy-header-tab {
     position: relative;
     float: left;
     width: 33.33%;
@@ -28,23 +28,23 @@
     transition: .07s;
 }
 
-.twitter-header-tab:hover {
+.birdy-header-tab:hover {
     background-color: #AAB8C2;
 }
 
-.selected-twitter-header-tab {
+.selected-birdy-header-tab {
     border-bottom: .2vh solid #1DA1F2;
     color: #1DA1F2;
 }
 
-.twitter-app-header {
+.birdy-app-header {
     position: relative;
     padding: 5vh 0 0 1.85vh;
     font-family: 'Poppins', sans-serif;
     font-size: 2vh;
 }
 
-.twitter-home-tab {
+.birdy-home-tab {
     display: block;
     position: absolute;
     height: 75%;
@@ -55,19 +55,19 @@
     overflow-x: hidden !important;
 }
 
-.twitter-home-tab::-webkit-scrollbar {
+.birdy-home-tab::-webkit-scrollbar {
     width: .7vh;
 }
 
-.twitter-home-tab::-webkit-scrollbar-thumb {
+.birdy-home-tab::-webkit-scrollbar-thumb {
     background-color: #1DA1F2;
 }
 
-.twitter-home-tab::-webkit-scrollbar-track {
+.birdy-home-tab::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.twitter-mentions-tab {
+.birdy-mentions-tab {
     display: none;
     position: absolute;
     height: 75%;
@@ -78,19 +78,19 @@
     overflow-x: hidden !important;
 }
 
-.twitter-mentions-tab::-webkit-scrollbar {
+.birdy-mentions-tab::-webkit-scrollbar {
     width: .7vh;
 }
 
-.twitter-mentions-tab::-webkit-scrollbar-thumb {
+.birdy-mentions-tab::-webkit-scrollbar-thumb {
     background-color: #1DA1F2;
 }
 
-.twitter-mentions-tab::-webkit-scrollbar-track {
+.birdy-mentions-tab::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.twitter-hashtags-tab {
+.birdy-hashtags-tab {
     display: none;
     position: absolute;
     height: 75%;
@@ -101,19 +101,19 @@
     overflow-x: hidden !important;
 }
 
-.twitter-hashtags-tab::-webkit-scrollbar {
+.birdy-hashtags-tab::-webkit-scrollbar {
     width: .7vh;
 }
 
-.twitter-hashtags-tab::-webkit-scrollbar-thumb {
+.birdy-hashtags-tab::-webkit-scrollbar-thumb {
     background-color: #1DA1F2;
 }
 
-.twitter-hashtags-tab::-webkit-scrollbar-track {
+.birdy-hashtags-tab::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.twitter-tweet {
+.birdy-tweet {
     position: relative;
     height: auto;
     width: 90%;
@@ -124,7 +124,7 @@
     color: white;
 }
 
-.twitter-tweet-hashtag {
+.birdy-tweet-hashtag {
     position: relative;
     height: auto;
     width: 100%;
@@ -132,7 +132,7 @@
     margin-bottom: 2.5vh;
 }
 
-.twitter-mentioned-tweet {
+.birdy-mentioned-tweet {
     position: relative;
     height: auto;
     width: 100%;
@@ -192,7 +192,7 @@
     word-wrap: break-word;
 }
 
-.twitter-new-tweet {
+.birdy-new-tweet {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -206,18 +206,18 @@
     transition: .1s;
 }
 
-.twitter-new-tweet:hover {
+.birdy-new-tweet:hover {
     background-color: rgb(62, 179, 252);
 }
 
-.twitter-new-tweet > i {
+.birdy-new-tweet > i {
     line-height: 5.5vh;
     font-size: 2vh;
     transform: rotate(-20deg);
     color: white;
 }
 
-.twitter-new-tweet-tab {
+.birdy-new-tweet-tab {
     display: none;
     position: absolute;
     display: block;
@@ -229,7 +229,7 @@
     z-index: 105;
 }
 
-.twitter-new-tweet-header {
+.birdy-new-tweet-header {
     position: relative;
     padding: 6vh 0 0 9vh;
     font-family: 'Poppins', sans-serif;
@@ -291,7 +291,7 @@
     display: none;
 }
 
-.twitter-new-tweet-buttons {
+.birdy-new-tweet-buttons {
     position: absolute;
     bottom: 40px;
     width: 100%;
@@ -299,7 +299,7 @@
     color: white;
 }
 
-.twitter-new-tweet-button {
+.birdy-new-tweet-button {
     position: relative;
     float: left;
     width: 33%;
@@ -312,11 +312,11 @@
     transition: .1s;
 }
 
-.twitter-new-tweet-button:hover {
+.birdy-new-tweet-button:hover {
     border-top: .3vh solid #1DA1F2;
 }
 
-.twitter-no-tweets {
+.birdy-no-tweets {
     position: absolute;
     text-align: center;
     top: 4vh;
@@ -338,7 +338,7 @@
     transition: .2s;
 }
 
-.twitter-hashtag {
+.birdy-hashtag {
     position: relative;
     height: 7vh;
     width: 90%;
@@ -350,7 +350,7 @@
     transition: all 0.2s ease 0s;
 }
 
-.twitter-hashtag-status{
+.birdy-hashtag-status{
     position: absolute;
     top: .8vh;
     left: 1vh;
@@ -359,7 +359,7 @@
     color: white;
 }
 
-.twitter-hashtag-tag {
+.birdy-hashtag-tag {
     position: absolute;
     top: 2.5vh;
     left: 1vh;
@@ -367,7 +367,7 @@
     font-size: 1.4vh;
     color: white;
 }
-.twitter-hashtag-messages {
+.birdy-hashtag-messages {
     position: absolute;
     bottom: .8vh;
     left: 1vh;
@@ -375,12 +375,12 @@
     font-size: 1.1vh;
     color: white;
 }
-.twitter-hashtags {
+.birdy-hashtags {
     position: absolute;
     display: block;
     width: 100%;
 }
-.twitter-hashtag-tweets {
+.birdy-hashtag-tweets {
     display: none;
     position: absolute;
     top: 0;
@@ -392,14 +392,14 @@
     overflow-x: hidden;
 }
 
-.twitter-hashtag-tweets::-webkit-scrollbar {
+.birdy-hashtag-tweets::-webkit-scrollbar {
     width: .2vh;
 }
 
-.twitter-hashtag-tweets::-webkit-scrollbar-thumb {
+.birdy-hashtag-tweets::-webkit-scrollbar-thumb {
     background-color: #1DA1F2;
 }
 
-.twitter-hashtag-tweets::-webkit-scrollbar-track {
+.birdy-hashtag-tweets::-webkit-scrollbar-track {
     background-color: transparent;
 }

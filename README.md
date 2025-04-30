@@ -44,9 +44,9 @@ Advanced Phone for QB-Core Framework :iphone:
 ![Crypto](https://cdn.discordapp.com/attachments/921675245360922625/921675457718517820/qbit.jpg)
 ![Gallery](https://cdn.discordapp.com/attachments/921675245360922625/921675441381736448/gallery.jpg)
 ![MEOS](https://cdn.discordapp.com/attachments/921675245360922625/921675440488341534/meos.jpg)
-![Twitter](https://cdn.discordapp.com/attachments/921675245360922625/921675459270438922/twitter.jpg)
+![birdy](https://cdn.discordapp.com/attachments/921675245360922625/921675459270438922/birdy.jpg)
 ![Settings](https://cdn.discordapp.com/attachments/921675245360922625/921675458905513984/setting.jpg)
-![Whatsapp](https://cdn.discordapp.com/attachments/921675245360922625/921675459517906944/whatsapp.jpg)
+![chitchat](https://cdn.discordapp.com/attachments/921675245360922625/921675459517906944/chitchat.jpg)
 ![Phone](https://cdn.discordapp.com/attachments/921675245360922625/921675440677064745/phone.jpg)
 
 ## Features
